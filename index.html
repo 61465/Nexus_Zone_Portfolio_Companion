@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مجمع سوار الأندلس — وجهة تجارية فاخرة في قلب الرياض. تجربة افتراضية تأخذك من الشارع حتى داخل محلات الذهب والمحلات الراقية.">
+  <title>سوار الأندلس | مجمع تجاري وإداري فاخر</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP (used only for logo stroke; plain CSS handles everything else) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+</head>
+<body>
+
+  <!-- Skip button (shown after gate) -->
+  <button type="button" class="skip-intro" id="skip-intro" aria-label="تجاوز المقدمة">تجاوز المقدمة ←</button>
+
+  <!-- ══════════════════════════════════════
+       INTRO SEQUENCE
+  ══════════════════════════════════════ -->
+  <div id="intro" aria-hidden="true">
+
+    <!-- Stage 0: Gate / Splash -->
+    <section id="gate" class="stage active" role="region" aria-label="بوابة الدخول">
+      <div class="gate-pattern"></div>
+      <!-- decorative arcs -->
+      <div class="gate-arc"></div>
+      <div class="gate-arc"></div>
+      <div class="gate-arc"></div>
+
+      <!-- Dark overlay — click to illuminate -->
+      <div id="illuminate-overlay" class="illuminate-overlay" role="button"
+           tabindex="0" aria-label="اضغط للإضاءة">
+        <div class="illum-rays"></div>
+        <div class="illum-center-glow"></div>
+        <div class="illum-click-text">
+          <span class="illum-icon">✦</span>
+          <span class="illum-label">اضغط للإضاءة</span>
+          <span class="illum-icon">✦</span>
+        </div>
+        <div class="illum-pulse-ring"></div>
+        <div class="illum-pulse-ring delay"></div>
+      </div>
+
+      <div class="gate-content" id="gate-content">
+        <h1 class="gate-mark">سـوار</h1>
+        <p class="gate-sub">مجمع سوار الأندلس</p>
+        <button id="enter-btn" class="fancy-btn" aria-label="ابدأ التجربة الافتراضية">
+          <span class="btn-text">ادخل سوار</span>
+          <span class="btn-icon">←</span>
+        </button>
+        <p class="gate-hint">تجربة افتراضية &middot; ٤٥ ثانية</p>
+      </div>
+    </section>
+
+    <!-- Stage 1: Logo Reveal -->
+    <section id="stage-1" class="stage" role="region" aria-label="هوية المشروع">
+      <div class="logo-stage">
+        <svg id="sawar-svg" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-label="شعار سوار">
+          <!-- stroke path (animated draw) -->
+          <text x="300" y="148" font-family="Amiri, serif" font-size="165" font-weight="700"
+                fill="none" stroke="#E8C77A" stroke-width="1.5"
+                text-anchor="middle" class="logo-stroke">سوار</text>
+          <!-- fill (fades in after stroke) -->
+          <text x="300" y="148" font-family="Amiri, serif" font-size="165" font-weight="700"
+                fill="#F4EEE2" text-anchor="middle" class="logo-fill">سوار</text>
+        </svg>
+        <p class="logo-sub">م&nbsp;ج&nbsp;م&nbsp;ع &nbsp;&nbsp; س&nbsp;و&nbsp;ا&nbsp;ر &nbsp;&nbsp; ا&nbsp;ل&nbsp;أ&nbsp;ن&nbsp;د&nbsp;ل&nbsp;س</p>
+      </div>
+    </section>
+
+    <!-- Stage 2: Aerial / Central Plaza -->
+    <section id="stage-2" class="stage image-stage" role="region" aria-label="الساحة المركزية">
+      <div class="image-frame">
+        <img src="assets/aerial.jpg" alt="لقطة جوية للساحة المركزية لمجمع سوار الأندلس" loading="eager">
+      </div>
+      <div class="vignette"></div>
+      <div class="stage-progress-bar"></div>
+      <div class="caption-wrap"><div class="caption">حيث يلتقي الطموح بالأناقة</div></div>
+    </section>
+
+    <!-- Stage 3: Wide shot -->
+    <section id="stage-3" class="stage image-stage" role="region" aria-label="المبنى الكامل">
+      <div class="image-frame">
+        <img src="assets/wide.jpg" alt="المبنى الكامل من الخارج — مجمع سوار الأندلس" loading="eager">
+      </div>
+      <div class="vignette"></div>
+      <div class="stage-progress-bar"></div>
+      <div class="caption-wrap"><div class="caption">واجهة معاصرة بروح نجدية</div></div>
+    </section>
+
+    <!-- Stage 4: Facade close-up -->
+    <section id="stage-4" class="stage image-stage" role="region" aria-label="واجهة المجمع">
+      <div class="image-frame">
+        <img src="assets/facade.jpg" alt="واجهة مجمع سوار الأندلس والمحلات التجارية" loading="eager">
+      </div>
+      <div class="vignette"></div>
+      <div class="stage-progress-bar"></div>
+      <div class="caption-wrap"><div class="caption">ادخل عالماً من الفخامة</div></div>
+    </section>
+
+    <!-- Stage 5: Street level / shops -->
+    <section id="stage-5" class="stage image-stage" role="region" aria-label="المحلات التجارية">
+      <div class="image-frame">
+        <img src="assets/shop.jpg" alt="المحلات التجارية في الطابق الأرضي لمجمع سوار الأندلس" loading="eager">
+      </div>
+      <div class="vignette"></div>
+      <div class="stage-progress-bar"></div>
+      <div class="caption-wrap"><div class="caption">اختر باباً&hellip; وادخل</div></div>
+    </section>
+
+    <!-- Stage 6: Gold door -->
+    <section id="stage-door" class="stage" role="region" aria-label="باب الذهب">
+      <div class="door-scene" id="door-scene" tabindex="0" role="button" aria-label="اضغط لفتح الباب والدخول">
+        <div class="door-frame">
+          <div class="door-panel left">
+            <div class="door-grain"></div>
+            <div class="door-inlay"></div>
+          </div>
+          <div class="door-panel right">
+            <div class="door-grain"></div>
+            <div class="door-inlay"></div>
+          </div>
+          <div class="door-handle-l" aria-hidden="true"></div>
+          <div class="door-handle-r" aria-hidden="true"></div>
+          <div class="door-light" aria-hidden="true"></div>
+          <div class="door-burst" aria-hidden="true"></div>
+        </div>
+        <div class="door-cta" aria-hidden="true">
+          <span class="door-cta-text">ادفع الباب</span>
+          <span class="door-pulse">●</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Progress dots -->
+    <div class="intro-progress" aria-hidden="true" role="progressbar" aria-label="مراحل التجربة">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+  </div><!-- /intro -->
+
+
+  <!-- ══════════════════════════════════════
+       MAIN SITE
+  ══════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── Navbar ── -->
+    <header class="navbar" id="navbar" role="banner">
+      <div class="container nav-wrap">
+        <a href="#hero" class="brand" aria-label="سوار الأندلس — الرئيسية">
+          <span class="brand-mark">سوار</span>
+          <span class="brand-sub">الأندلس</span>
+        </a>
+
+        <nav class="nav-links" id="nav-links" role="navigation" aria-label="التنقل الرئيسي">
+          <a href="#hero">الرئيسية</a>
+          <a href="#about">عن المشروع</a>
+          <a href="#amenities">المرافق</a>
+          <a href="#gallery">المعرض</a>
+          <a href="#location">الموقع</a>
+          <a href="#contact">تواصل</a>
+        </nav>
+
+        <a href="#contact" class="cta-btn" id="navbar-cta">احجز جولة</a>
+
+        <button class="menu-toggle" id="menu-toggle"
+                aria-label="فتح القائمة" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+
+    <!-- ── Hero ── -->
+    <section id="hero" class="hero" aria-label="الصفحة الرئيسية">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="assets/entrance.jpg" alt="">
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="eyebrow">مجمع تجاري &middot; إداري &middot; ترفيهي</p>
+        <h1 class="hero-title">سوار الأندلس</h1>
+        <p class="hero-sub">وجهة فاخرة تجمع المكاتب والمحلات والحياة<br>في قلب الرياض</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary" id="hero-cta-primary">احجز جولة</a>
+          <a href="#amenities" class="btn-ghost" id="hero-cta-ghost">تصفّح المرافق</a>
+        </div>
+        <div class="hero-scroll" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+
+    <!-- ── About ── -->
+    <section id="about" class="section about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">عن المشروع</span>
+          <h2 id="about-heading">تصميم يلتقي فيه التراث بالحداثة</h2>
+          <span class="divider"></span>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="reveal">مجمع <strong>سوار الأندلس</strong> وجهة فريدة تجمع بين الفخامة والعملية. صُمّم ليقدّم تجربة متكاملة للمكاتب التجارية والمحلات الفاخرة، مع مساحات خضراء واسعة وساحة مركزية تتوسط المجمع.</p>
+            <p class="reveal">يجمع التصميم بين روح التراث النجدي بـ<em>vertical louvres</em> ذهبية اللون، واللمسات المعاصرة من زجاج وحجر طبيعي، ليوفر بيئة عمل وتسوق مريحة ومُلهمة.</p>
+            <p class="reveal">الموقع الاستراتيجي في قلب الرياض يجعله خياراً مثالياً للأعمال التجارية والزوار على حدٍّ سواء.</p>
+          </div>
+
+          <div class="stats" role="list">
+            <div class="stat reveal" role="listitem">
+              <div class="stat-num" data-count="24">٢٤</div>
+              <div class="stat-lbl">محل تجاري</div>
+            </div>
+            <div class="stat reveal" role="listitem">
+              <div class="stat-num" data-count="60">٦٠</div>
+              <div class="stat-lbl">مكتب إداري</div>
+            </div>
+            <div class="stat reveal" role="listitem">
+              <div class="stat-num">٣.٥k<small>م²</small></div>
+              <div class="stat-lbl">ساحة مركزية</div>
+            </div>
+            <div class="stat reveal" role="listitem">
+              <div class="stat-num">٢٠٠+</div>
+              <div class="stat-lbl">موقف سيارة</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── Amenities ── -->
+    <section id="amenities" class="section amenities" aria-labelledby="amenities-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">المرافق</span>
+          <h2 id="amenities-heading">كل ما تحتاجه في مكان واحد</h2>
+          <span class="divider"></span>
+        </div>
+
+        <div class="amen-grid">
+
+          <article class="amen-card reveal">
+            <div class="amen-icon-wrap">
+              <svg class="amen-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 6H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7 3c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zM5 17c0-1.67 3.34-2.5 5-2.5.36 0 .8.05 1.26.14C10.48 15.18 10 16.05 10 17H5zm14 0h-5c0-.95-.48-1.82-1.26-2.36.46-.09.9-.14 1.26-.14 1.66 0 5 .83 5 2.5z"/>
+              </svg>
+            </div>
+            <h3>محلات تجزئة فاخرة</h3>
+            <p>واجهات زجاجية واسعة لعلامات تجارية مختارة وتجربة تسوق راقية.</p>
+          </article>
+
+          <article class="amen-card reveal">
+            <div class="amen-icon-wrap">
+              <svg class="amen-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 6h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-5-2v2H9V4h6zm5 15H4V8h16v11z"/>
+              </svg>
+            </div>
+            <h3>مكاتب بانورامية</h3>
+            <p>مساحات عمل مرنة بإطلالات ممتدة وتصميم يُلهم الإنتاجية.</p>
+          </article>
+
+          <article class="amen-card reveal">
+            <div class="amen-icon-wrap">
+              <svg class="amen-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+            </div>
+            <h3>ساحة وأمفيتياتر</h3>
+            <p>قلب أخضر للمجمع: فعاليات، مقاهٍ، ومساحات لمّ شمل.</p>
+          </article>
+
+          <article class="amen-card reveal">
+            <div class="amen-icon-wrap">
+              <svg class="amen-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8a1 1 0 001 1h1a1 1 0 001-1v-1h12v1a1 1 0 001 1h1a1 1 0 001-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+              </svg>
+            </div>
+            <h3>مواقف واسعة مظلّلة</h3>
+            <p>أكثر من ٢٠٠ موقف مظلّل لراحة الزوار والمستأجرين.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── Gallery ── -->
+    <section id="gallery" class="section gallery" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">المعرض</span>
+          <h2 id="gallery-heading">لمحات من المشروع</h2>
+          <span class="divider"></span>
+        </div>
+
+        <div class="gal-grid">
+          <figure class="gal-item large reveal" data-src="assets/aerial.jpg">
+            <img src="assets/aerial.jpg" alt="الساحة المركزية — لقطة جوية">
+            <figcaption>الساحة المركزية</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-src="assets/wide.jpg">
+            <img src="assets/wide.jpg" alt="الواجهة الرئيسية للمجمع">
+            <figcaption>الواجهة الرئيسية</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-src="assets/facade.jpg">
+            <img src="assets/facade.jpg" alt="المدخل الرئيسي والمحلات">
+            <figcaption>المدخل والمحلات</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-src="assets/entrance.jpg">
+            <img src="assets/entrance.jpg" alt="مدخل المجمع قريباً">
+            <figcaption>المدخل قريباً</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-src="assets/shop.jpg">
+            <img src="assets/shop.jpg" alt="المحلات التجارية في الطابق الأرضي">
+            <figcaption>المحلات التجارية</figcaption>
+          </figure>
+          <figure class="gal-item reveal" data-src="assets/parking.jpg">
+            <img src="assets/parking.jpg" alt="المواقف والمدخل الجانبي">
+            <figcaption>المواقف والمداخل</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── Location ── -->
+    <section id="location" class="section location" aria-labelledby="location-heading">
+      <div class="container loc-grid">
+        <div class="loc-text">
+          <span class="kicker">الموقع</span>
+          <h2 id="location-heading">في قلب الرياض</h2>
+          <span class="divider"></span>
+          <p>يقع مجمع سوار الأندلس في موقع مميز يربط بين الأحياء التجارية والسكنية الراقية، مع سهولة وصول للطرق الرئيسية وقربه من الخدمات الحيوية.</p>
+          <ul class="loc-list">
+            <li>١٠ دقائق من مركز المدينة</li>
+            <li>قريب من الطرق السريعة الرئيسية</li>
+            <li>محاط بالأحياء السكنية الراقية</li>
+            <li>وصول مباشر للمواصلات العامة</li>
+          </ul>
+        </div>
+
+        <div class="loc-map reveal">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=46.6753%2C24.7136%2C46.7053%2C24.7336&amp;layer=mapnik"
+            loading="lazy"
+            title="موقع مجمع سوار الأندلس على الخريطة">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── Contact ── -->
+    <section id="contact" class="section contact" aria-labelledby="contact-heading">
+      <div class="container con-grid">
+
+        <div class="con-info reveal">
+          <span class="kicker">تواصل معنا</span>
+          <h2 id="contact-heading">احجز جولتك الخاصة</h2>
+          <span class="divider"></span>
+          <p>فريقنا جاهز للرد على استفساراتك وحجز جولة افتراضية أو ميدانية للمجمع.</p>
+          <ul class="con-list">
+            <li><strong>هاتف:</strong> 920 000 000</li>
+            <li><strong>إيميل:</strong> info@sawar.sa</li>
+            <li><strong>العنوان:</strong> الرياض، المملكة العربية السعودية</li>
+          </ul>
+          <div class="socials" aria-label="وسائل التواصل الاجتماعي">
+            <a href="#" aria-label="إنستقرام" id="social-ig">IG</a>
+            <a href="#" aria-label="تويتر / إكس" id="social-x">X</a>
+            <a href="#" aria-label="لينكدإن" id="social-li">in</a>
+          </div>
+        </div>
+
+        <form class="con-form reveal" id="contact-form" novalidate
+              aria-label="نموذج حجز جولة">
+          <label for="con-name">الاسم الكامل
+            <input type="text" id="con-name" name="name" required placeholder="مثال: أحمد محمد" autocomplete="name">
+          </label>
+          <label for="con-phone">رقم الجوال
+            <input type="tel" id="con-phone" name="phone" required placeholder="05xxxxxxxx" autocomplete="tel">
+          </label>
+          <label for="con-msg">الرسالة
+            <textarea id="con-msg" name="message" rows="4" required placeholder="أخبرنا كيف يمكننا مساعدتك..."></textarea>
+          </label>
+          <button type="submit" class="btn-primary" id="con-submit">إرسال الطلب</button>
+          <p class="form-ok" id="form-success" hidden role="alert">✓ تم استلام طلبك، سنتواصل معك قريباً.</p>
+        </form>
+
+      </div>
+    </section>
+
+
+    <!-- ── Footer ── -->
+    <footer class="footer" role="contentinfo">
+      <div class="container foot-wrap">
+        <div class="foot-brand">
+          <span class="brand-mark">سوار</span>
+          <span class="brand-sub">الأندلس</span>
+          <p>وجهة فاخرة في قلب الرياض، حيث يلتقي التراث بالحداثة.</p>
+        </div>
+        <nav class="foot-links" aria-label="روابط سريعة">
+          <h4>روابط سريعة</h4>
+          <a href="#about">عن المشروع</a>
+          <a href="#amenities">المرافق</a>
+          <a href="#gallery">المعرض</a>
+          <a href="#location">الموقع</a>
+          <a href="#contact">تواصل</a>
+        </nav>
+        <div class="foot-contact">
+          <h4>تواصل</h4>
+          <p>info@sawar.sa</p>
+          <p dir="ltr">920 000 000</p>
+          <p>الرياض، المملكة العربية السعودية</p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <div class="container">
+          &copy; 2026 مجمع سوار الأندلس &middot; جميع الحقوق محفوظة
+        </div>
+      </div>
+    </footer>
+
+  </main><!-- /main-content -->
+
+
+  <!-- ── Lightbox ── -->
+  <div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="عرض الصورة">
+    <button class="lb-close" id="lb-close" aria-label="إغلاق معرض الصور">✕</button>
+    <img id="lb-img" alt="">
+  </div>
+
+
+  <!-- Main script -->
+  <script src="main.js"></script>
+
+</body>
+</html>
