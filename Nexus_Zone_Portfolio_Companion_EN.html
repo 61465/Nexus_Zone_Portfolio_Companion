@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nexus Zone — Portfolio Companion · Product Catalog</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @page { size: A4; margin: 14mm 16mm; }
+  @page :first { margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 10.3pt;
+    line-height: 1.6;
+  }
+
+  /* ═══════════════ COVER ═══════════════ */
+  .cover {
+    page-break-after: always;
+    height: 297mm;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 60%, #0f0f23 100%);
+    color: #fff;
+    padding: 45mm 22mm;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(212,175,55,.15) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(78,158,255,.12) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .cover .brand {
+    font-size: 11pt;
+    letter-spacing: 10px;
+    color: #d4af37;
+    margin-bottom: 40mm;
+    font-weight: 300;
+    z-index: 2;
+  }
+  .cover h1 {
+    font-size: 46pt;
+    font-weight: 900;
+    color: #f2e6bc;
+    line-height: 1.05;
+    margin-bottom: 8mm;
+    letter-spacing: -1px;
+    z-index: 2;
+  }
+  .cover .subtitle {
+    font-size: 15pt;
+    color: #d4af37;
+    font-weight: 500;
+    margin-bottom: 4mm;
+    letter-spacing: 1px;
+    z-index: 2;
+  }
+  .cover .en-subtitle {
+    font-size: 10.5pt;
+    color: #999;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .cover .divider {
+    width: 60mm;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    margin: 40mm auto 12mm;
+    z-index: 2;
+  }
+  .cover .tagline {
+    font-size: 12pt;
+    color: #ccc;
+    font-style: italic;
+    max-width: 110mm;
+    z-index: 2;
+    line-height: 1.6;
+  }
+  .cover .footer-cover {
+    position: absolute;
+    bottom: 15mm;
+    left: 0; right: 0;
+    text-align: center;
+    color: #666;
+    font-size: 9pt;
+    z-index: 2;
+  }
+  .cover .footer-cover b { color: #d4af37; font-weight: 600; }
+
+  /* ═══════════════ CONTENT ═══════════════ */
+  section {
+    padding: 12mm 0 6mm 0;
+    page-break-inside: avoid;
+  }
+  h2 {
+    font-size: 24pt;
+    font-weight: 800;
+    color: #0a0a0a;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    border-bottom: 3px solid #d4af37;
+    letter-spacing: -0.3px;
+    position: relative;
+  }
+  h2 .h2-tag {
+    display: block;
+    font-size: 9pt;
+    color: #999;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  h3 {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 16px 0 6px 0;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0b5fff;
+    margin: 12px 0 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  p {
+    margin-bottom: 8px;
+    color: #2a2a2a;
+    font-size: 10.3pt;
+  }
+  ul { margin: 4px 0 10px 20px; padding: 0; }
+  li { margin-bottom: 4px; line-height: 1.6; }
+  strong { color: #000; font-weight: 700; }
+  em { color: #444; font-style: italic; }
+  code {
+    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+    background: #f2f2f2;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 9.3pt;
+    color: #333;
+  }
+
+  /* ═══════════════ TOC ═══════════════ */
+  .toc { page-break-after: always; }
+  .toc h2 { margin-bottom: 24px; }
+  .toc-item {
+    padding: 6px 0;
+    border-bottom: 1px dashed #ddd;
+    font-size: 11pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .toc-num {
+    color: #d4af37;
+    font-weight: 700;
+    min-width: 36px;
+    font-family: ui-monospace, monospace;
+  }
+  .toc-name { flex: 1; padding: 0 12px; color: #1a1a1a; }
+  .toc-page { color: #999; font-size: 9pt; font-family: ui-monospace, monospace; }
+
+  /* ═══════════════ PRODUCT CARDS ═══════════════ */
+  .product {
+    margin-bottom: 22px;
+    page-break-inside: avoid;
+  }
+  .prod-header {
+    background: linear-gradient(90deg, #0a0a0a, #1a1a2e);
+    color: #f2e6bc;
+    padding: 14px 18px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .prod-name {
+    font-size: 16pt;
+    font-weight: 800;
+    color: #d4af37;
+  }
+  .prod-tag {
+    font-size: 9pt;
+    letter-spacing: 1.5px;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .prod-body {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    padding: 14px 18px;
+  }
+  .prod-meta {
+    font-size: 9.3pt;
+    color: #555;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .prod-meta .meta-item b {
+    color: #0a0a0a;
+    font-weight: 600;
+  }
+
+  /* Highlight boxes */
+  .signature-box {
+    background: linear-gradient(135deg, #fff8e7, #fffef5);
+    border-left: 4px solid #d4af37;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 3px;
+  }
+  .signature-box .label {
+    color: #b26a00;
+    font-size: 8.8pt;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .signature-box p {
+    color: #2a2a2a;
+    font-size: 10.2pt;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  .metric-box {
+    background: linear-gradient(135deg, #e6f2ff, #f5faff);
+    border-left: 4px solid #0b5fff;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 3px;
+  }
+  .metric-box .label {
+    color: #0b5fff;
+    font-size: 8.8pt;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .stat-item {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 12px 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .stat-item .n {
+    font-size: 20pt;
+    font-weight: 900;
+    color: #d4af37;
+    display: block;
+    line-height: 1;
+  }
+  .stat-item .l {
+    font-size: 8pt;
+    color: #ccc;
+    margin-top: 4px;
+    display: block;
+    letter-spacing: 0.5px;
+  }
+
+  /* Quote */
+  .quote {
+    background: #0a0a0a;
+    color: #f2e6bc;
+    padding: 18px 24px;
+    margin: 14px 0;
+    border-radius: 5px;
+    font-style: italic;
+    font-size: 12pt;
+    text-align: center;
+    line-height: 1.5;
+    position: relative;
+  }
+  .quote::before {
+    content: "❝";
+    position: absolute;
+    top: 4px;
+    left: 12px;
+    color: #d4af37;
+    font-size: 24pt;
+    line-height: 1;
+  }
+
+  /* Tags */
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0;
+  }
+  .tag {
+    background: #f2f2f2;
+    color: #444;
+    font-size: 8.5pt;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .tag.gold {
+    background: #fff3d0;
+    color: #b26a00;
+  }
+  .tag.blue {
+    background: #e6f0ff;
+    color: #0b5fff;
+  }
+  .tag.green {
+    background: #e8f7ea;
+    color: #0a7d1c;
+  }
+  .tag.red {
+    background: #ffeaea;
+    color: #c02020;
+  }
+
+  /* Research blocks */
+  .research-block {
+    border: 2px solid #d4af37;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #fff, #fdf9ec);
+  }
+  .research-block .r-title {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #0a0a0a;
+    margin-bottom: 4px;
+  }
+  .research-block .r-badge {
+    display: inline-block;
+    background: #d4af37;
+    color: #000;
+    font-size: 8pt;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Bounty table */
+  .bounty-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.3pt;
+    margin: 8px 0;
+  }
+  .bounty-table th, .bounty-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    vertical-align: top;
+  }
+  .bounty-table th {
+    background: #0a0a0a;
+    color: #d4af37;
+    font-weight: 700;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .status-accepted { color: #0a7d1c; font-weight: 700; }
+  .status-triage   { color: #b26a00; font-weight: 700; }
+  .status-live     { color: #1e5db0; font-weight: 700; }
+
+  /* Final page */
+  .final-page {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #fff;
+    padding: 50mm 22mm;
+    text-align: center;
+    height: 297mm;
+    page-break-before: always;
+  }
+  .final-page h2 {
+    color: #d4af37;
+    font-size: 28pt;
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  .final-page .h2-tag { display: none; }
+  .final-page .final-msg {
+    color: #f2e6bc;
+    font-size: 13pt;
+    max-width: 130mm;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+  }
+  .final-page .contact-block {
+    background: rgba(212,175,55,.08);
+    border: 1px solid rgba(212,175,55,.3);
+    border-radius: 10px;
+    padding: 22px 34px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .final-page .email {
+    color: #d4af37;
+    font-size: 15pt;
+    letter-spacing: 1px;
+    font-family: ui-monospace, monospace;
+  }
+
+  a { color: #0b5fff; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ COVER ═══════════════════════════════ -->
+<div class="cover">
+  <div class="brand">N E X U S &nbsp; Z O N E</div>
+  <h1>Portfolio<br>Companion</h1>
+  <div class="subtitle">Product Catalog · Invention Catalog</div>
+  <div class="en-subtitle">Edition 2026</div>
+  <div class="divider"></div>
+  <div class="tagline">
+    "Where technology meets craft."<br>
+    A complete inventory of shipped products, published research, and applied-security field work.
+  </div>
+  <div class="footer-cover">
+    <b>Founded by game_nexus_zone</b><br>
+    <span style="color:#888;">Confidential portfolio companion · Distribute with attribution</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TOC ═══════════════════════════════ -->
+<section class="toc">
+  <h2><span class="h2-tag">Table of Contents</span>Inside this book</h2>
+  <div class="toc-item"><span class="toc-num">00</span><span class="toc-name">About This Companion</span><span class="toc-page">Introduction</span></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-name">Nexus Zone — the parent brand</span><span class="toc-page">Ch. 1</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-name">LucidCode — code that confesses</span><span class="toc-page">Ch. 2</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-name">Laundry — the legacy-code laundry room</span><span class="toc-page">Ch. 3</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-name">NEXUS-AI — 51-agent orchestration fabric</span><span class="toc-page">Ch. 4</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-name">midcine — Arabic radiology AI</span><span class="toc-page">Ch. 5</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-name">thawani.cc — WhatsApp commerce SaaS</span><span class="toc-page">Ch. 6</span></div>
+  <div class="toc-item"><span class="toc-num">07</span><span class="toc-name">ARIA v9.0 — sovereign AI companion</span><span class="toc-page">Ch. 7</span></div>
+  <div class="toc-item"><span class="toc-num">08</span><span class="toc-name">NEXUS Vigil™ — abandoned-vehicle intelligence</span><span class="toc-page">Ch. 8</span></div>
+  <div class="toc-item"><span class="toc-num">09</span><span class="toc-name">The Security Stack — SecOps · Firm · SENTINEL · VulnAdvisor</span><span class="toc-page">Ch. 9</span></div>
+  <div class="toc-item"><span class="toc-num">10</span><span class="toc-name">Gaming Universe — 6 platforms</span><span class="toc-page">Ch. 10</span></div>
+  <div class="toc-item"><span class="toc-num">11</span><span class="toc-name">Specialized Products — Zwaya Fit · GZ CyberRange · V24</span><span class="toc-page">Ch. 11</span></div>
+  <div class="toc-item"><span class="toc-num">12</span><span class="toc-name">Published Research</span><span class="toc-page">Ch. 12</span></div>
+  <div class="toc-item"><span class="toc-num">13</span><span class="toc-name">Competitive Results — Kaggle</span><span class="toc-page">Ch. 13</span></div>
+  <div class="toc-item"><span class="toc-num">14</span><span class="toc-name">Responsible-Disclosure Track Record</span><span class="toc-page">Ch. 14</span></div>
+  <div class="toc-item"><span class="toc-num">15</span><span class="toc-name">Roadmap Ahead</span><span class="toc-page">Ch. 15</span></div>
+</section>
+
+<!-- ═══════════════════════════════ INTRO ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Introduction</span>00 — About This Companion</h2>
+
+  <p>This companion is <b>not a résumé</b>. A résumé is a one-page document you read in thirty seconds. This companion is what you read <em>after</em> the résumé — when you have decided the products deserve closer inspection.</p>
+
+  <p>Every product here follows one design rule: <b>every claim must be verifiable</b>. Every number is measurable in a running system. Every architectural choice is defended by a public commit, a working demo, or a peer-review-ready research paper.</p>
+
+  <div class="quote">
+    Products are not judged by the demos they run. They are judged by the demos they refuse to run.
+  </div>
+
+  <p>Inside this catalog you will find <b>twelve shipping products</b>, <b>three research papers</b>, <b>six Kaggle competitions</b>, and <b>nine responsible-disclosure engagements</b> with organisations including Okta, Magic Labs, LaunchDarkly, Gearset, and Shopify. Each product page states what the product does, what makes it different from its category, the technical signature that gives it edge, and the verified numbers behind its claims.</p>
+
+  <div class="stats-bar">
+    <div class="stat-item"><span class="n">12+</span><span class="l">Shipped products</span></div>
+    <div class="stat-item"><span class="n">3</span><span class="l">Research papers</span></div>
+    <div class="stat-item"><span class="n">9+</span><span class="l">Disclosure engagements</span></div>
+    <div class="stat-item"><span class="n">51</span><span class="l">AI agents in prod</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH1: NEXUS ZONE ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 1 · The Parent Brand</span>01 — Nexus Zone</h2>
+
+  <p><b>Nexus Zone</b> is the umbrella brand under which every product in this catalog ships. The name unifies two heritages:</p>
+  <ul>
+    <li><b>Game Zone</b> — the original mastery territory: interactive experiences, gamer platforms, community tools.</li>
+    <li><b>Nexus</b> — the connection point that links gaming to AI, cybersecurity, and software engineering.</li>
+  </ul>
+
+  <p>Nexus Zone operates in <b>eight service lines</b>, each backed by at least one shipping product:</p>
+
+  <div class="tag-row">
+    <span class="tag gold">Gamer platforms</span>
+    <span class="tag gold">Digital marketing</span>
+    <span class="tag gold">Project delivery</span>
+    <span class="tag gold">Social channels</span>
+    <span class="tag blue">Cybersecurity</span>
+    <span class="tag blue">AI solutions</span>
+    <span class="tag blue">Legacy-code modernization</span>
+    <span class="tag blue">Enterprise code review</span>
+  </div>
+
+  <div class="metric-box">
+    <span class="label">Market Position</span>
+    <p>Nexus Zone is the first Arab-founded technology house to combine consumer-facing gaming products (Golden Arena, Waraq Reader) with enterprise-grade engineering tooling (LucidCode, Laundry) under a single Charter. A single customer can build a game, secure a website, modernise legacy code, and receive an Arabic radiology report — from one origin.</p>
+  </div>
+
+  <p><b>Public site:</b> <code>61465.github.io/game-zone-hub</code></p>
+  <p><b>Founder:</b> game_nexus_zone.</p>
+</section>
+
+<!-- ═══════════════════════════════ CH2: LUCIDCODE ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">LucidCode</span>
+      <span class="prod-tag">v0.5.0 · Program Verification</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Version:</b> 0.5.0</span>
+        <span class="meta-item"><b>Licence:</b> Commercial (Nexus Zone 1.0)</span>
+        <span class="meta-item"><b>Tests:</b> 330 / 330</span>
+        <span class="meta-item"><b>Benchmark:</b> F1 = 1.00 on 22 CVE-inspired fixtures</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 2 · Code Confession Engine</span>02 — LucidCode</h2>
+
+      <p>LucidCode is a developer-experience tool that grants source code cognitive self-awareness. Instead of running static rules over a file, LucidCode makes the code <b>confess in first person</b> — and rigorously refutes any confession that cannot be proven.</p>
+
+      <div class="quote">
+        [T1] Suppression @ line 8 — "I confessed: I caught an exception and said nothing. Every scream is muffled the moment it starts. What am I hiding?"
+      </div>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">Three-Engine Anti-Hallucination Ensemble</span>
+        <p>Every confession passes through three independent verifiers before it reaches the user: (1) a deterministic AST re-verifier weighted at 0.90, (2) a sandboxed fuzzer weighted at 0.70, (3) an adversarial LLM devil weighted at 0.40. A Bayesian aggregator produces a calibrated verdict. Hallucinated confessions are logged internally and never displayed.</p>
+      </div>
+
+      <h4>Positioning</h4>
+      <ul>
+        <li><b>Semgrep / SonarQube:</b> static rule match, no reasoning.</li>
+        <li><b>Copilot:</b> autocomplete without validation.</li>
+        <li><b>CriticGPT:</b> single-model self-critique.</li>
+        <li><b>LucidCode:</b> every claim anchored to a real file+line, every fix voted on by three independent engines.</li>
+      </ul>
+
+      <h4>Deliverables</h4>
+      <p>12 CLI sub-commands · VS Code VSIX extension · CodeQL query pack · GitHub App scaffold · arXiv-ready whitepaper · Firecracker sandbox · <em>Ring</em> orchestrator (Red-Hat + War-Gaming + Human-Triage roles).</p>
+
+      <div class="metric-box">
+        <span class="label">Shipping Status</span>
+        <p>Field-validated on <b>3 real production repositories</b>. Benchmark suite of 22 CVE-inspired fixtures achieves <b>F1 = 1.00</b>. Commercial licence live under Nexus Zone Commercial 1.0. B2B pricing tier ready.</p>
+      </div>
+
+      <p><b>Landing page:</b> <code>61465.github.io/lucid/landing</code></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH3: LAUNDRY ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Laundry</span>
+      <span class="prod-tag">v0.3.2 · Legacy-Code Modernization</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Version:</b> 0.3.2</span>
+        <span class="meta-item"><b>Tests:</b> 97 / 97</span>
+        <span class="meta-item"><b>Codebase:</b> 62 Python modules</span>
+        <span class="meta-item"><b>Battle-tested on:</b> Django (2,974 files), Airflow (9,082 files)</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 3 · The Laundry Room</span>03 — Laundry</h2>
+
+      <p>Laundry is a legacy-code modernization pipeline that <b>never merges</b>. It runs twelve specialised agents on a target repository and produces one signed evidence bundle a human engineer can approve — with a full before/after explanation for every unit of code.</p>
+
+      <div class="quote">
+        Legacy code goes in. Evidence comes out. The tool never merges.
+      </div>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">Immutable Charter · Ten Non-Negotiable Rules</span>
+        <p>At session start Laundry loads a Charter of ten runtime-immutable rules — no auto-merge, evidence before edit, judge never writes code, uncited claims dropped, dead code needs two independent proofs, and more. The Charter is stored in a <em>MappingProxyType</em> at runtime; any mutation attempt raises <em>TypeError</em>. The Charter protects the tool from the tool's operator.</p>
+      </div>
+
+      <h4>Twelve Specialised Agents</h4>
+      <p>Each agent has one job. The judge never writes code. The updater refuses to run without a passing baseline. The parity agent isolates every patch in a sandbox before accepting it.</p>
+
+      <div class="tag-row">
+        <span class="tag">Indexer</span>
+        <span class="tag">Security</span>
+        <span class="tag">Business Rules</span>
+        <span class="tag">Dead Code</span>
+        <span class="tag">Tests</span>
+        <span class="tag">Updater</span>
+        <span class="tag">Parity</span>
+        <span class="tag">Architecture</span>
+        <span class="tag gold">Explainer ⭐</span>
+        <span class="tag">Passport</span>
+        <span class="tag">Documenter</span>
+        <span class="tag">Judge</span>
+      </div>
+
+      <h4>Verified Field Results</h4>
+      <ul>
+        <li><b>Django</b> (v5.2 · 2,974 Python files) — analysed in <b>88 seconds</b>. Surfaced 289 real secrets, 3,607 business rules, 351 dead-code candidates, zero crashes.</li>
+        <li><b>Apache Airflow</b> (main branch · 9,082 files) — analysed in <b>116 seconds</b>. 486 real secrets surfaced, 5,000 business rules, 2,000 dead-code candidates, six agent-level contradictions correctly escalated.</li>
+        <li><b>Flask</b> (85 files, 5.9 s) and <b>Requests</b> (37 files, 3.7 s) — control runs confirming false-positive rate on clean code.</li>
+      </ul>
+
+      <div class="metric-box">
+        <span class="label">Commercial Readiness</span>
+        <p>21 LLM providers wired (Anthropic, OpenAI, Groq, Cerebras, Gemini, Bedrock, Vertex, and more). 15 integration categories (Slack, Sentry, Jira, Linear, etc.) via 138 documented environment keys. SARIF export lands directly in GitHub / GitLab / Azure DevOps code-scanning surfaces. HMAC signed-override protocol enforces human authorisation before any gate is bypassed.</p>
+      </div>
+
+      <p><b>Interactive live demo:</b> <code>61465.github.io/lucid/landing/laundry.html</code> (runs against <em>psf/requests v2.7.0</em>, May 2015).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH4: NEXUS-AI ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">NEXUS-AI</span>
+      <span class="prod-tag">v0.7 · 51-Agent Orchestration Fabric</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Agents:</b> 51</span>
+        <span class="meta-item"><b>Models:</b> 8 LLMs behind one facade</span>
+        <span class="meta-item"><b>Skills:</b> 1,580 curated</span>
+        <span class="meta-item"><b>Protocol:</b> MCP JSON-RPC 2.0</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 4 · The 51-Agent Fabric</span>04 — NEXUS-AI</h2>
+
+      <p>Most teams ship one or three agents. NEXUS-AI ships <b>fifty-one</b>, each with a narrow, well-defined role. The value is not in the count — it is in the coordination layer that keeps them useful.</p>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">Meta-Router with 100% Task Classification Accuracy</span>
+        <p>Every request enters through the <em>Meta-Router</em>, a rule-based classifier that maps the request to a task type (code_gen · reasoning · web_search · vision · osint · writing …) and then dispatches to the correct agent and the cheapest capable model. Verified 100% classification accuracy on a 13-request live test suite spanning real production traffic.</p>
+      </div>
+
+      <h4>Verified Runner — the Truth Layer</h4>
+      <p>Every agent response is filtered through three tiers before it leaves the fabric: (1) Tier-0 schema check, (2) Tier-1 NLI self-check, (3) 13-signature injection detector. Only fully-cleared responses reach the caller.</p>
+
+      <h4>Company Orchestrator</h4>
+      <p>For composite tasks, the Company Orchestrator decomposes the request into sub-tasks, dispatches them in parallel across specialised agents, verifies each result, and merges. Functionally, one call yields the output of an engineering department — at LLM latency.</p>
+
+      <div class="metric-box">
+        <span class="label">Production Footprint</span>
+        <p>NEXUS-AI is the shared brain across <b>midcine</b> (radiology inference orchestration), <b>thawani.cc</b> (customer-response automations), and internal engineering workflows. The Meta-Router prefers free-tier providers (Naraya · Groq · Cerebras), which drives real per-request cost close to zero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH5: MIDCINE ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">midcine</span>
+      <span class="prod-tag">Arabic Radiology AI · RIS/PACS</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Target:</b> Hospitals in MENA</span>
+        <span class="meta-item"><b>Read time:</b> 24-slice CT in ~69 s</span>
+        <span class="meta-item"><b>Confidence:</b> 92%</span>
+        <span class="meta-item"><b>Output:</b> DICOM SR-signed Arabic report</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 5 · Radiology Behind the Firewall</span>05 — midcine</h2>
+
+      <p>Most radiology-AI products run in US-hosted clouds. MENA hospitals cannot legally send patient scans there. midcine is designed to run <b>inside the hospital firewall</b> — no external network access unless explicitly authorised — and to write reports directly in Arabic, signed as standard DICOM SR objects.</p>
+
+      <h4>Measured Performance</h4>
+      <ul>
+        <li>Reads a 24-slice CT into a structured report in <b>~69 seconds</b>.</li>
+        <li>AI confidence: <b>92%</b>.</li>
+        <li>Guardian review reproduced an ACR-grade subarachnoid haemorrhage diagnosis.</li>
+        <li>Runs on 8 GB RAM minimum, 16 GB recommended.</li>
+        <li>Ten micro-services in a single pnpm/turbo monorepo.</li>
+      </ul>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">Vision + Clinical LLM Ensemble</span>
+        <p>midcine does not rely on a single model. Its pipeline chains a <em>Vision Classifier</em> (lesion class), a <em>Detection Model</em> (bounding boxes), a <em>Segmentation Model</em> (volume maps), a <em>Vision-Language</em> reader (radiological description), and a <em>Clinical LLM</em> (final report composition). Each model cross-verifies the previous one; disagreements route to a human reviewer.</p>
+      </div>
+
+      <div class="metric-box">
+        <span class="label">Offline-First Roadmap</span>
+        <p>Egyptian hospital networks are unreliable. midcine ships with Ollama fallbacks so an entire study can be read without any Internet connection. Optional premium services (TotalSegmentator, external PACS bridging) are opt-in.</p>
+      </div>
+
+      <p><b>Live demo:</b> <code>ame.tail19ddab.ts.net:8445/reports</code> (private Tailscale Funnel · synthetic patients).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH6: THAWANI ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">thawani.cc</span>
+      <span class="prod-tag">WhatsApp Commerce SaaS</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Market:</b> Saudi + Gulf</span>
+        <span class="meta-item"><b>Status:</b> Live paid tenants</span>
+        <span class="meta-item"><b>CR:</b> 3453105300</span>
+        <span class="meta-item"><b>VAT:</b> 311174977200003</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 6 · WhatsApp as a Storefront</span>06 — thawani.cc</h2>
+
+      <p>Every WhatsApp-commerce project hits the same wall: <b>Meta bans sessions</b>. Meta's own baseline ban rate is 0.5%. At scale, that means one tenant lost every day.</p>
+
+      <p>thawani.cc treats the ban problem as an engineering problem, not an operational one. The response is a <b>26-layer defence stack</b> operating in parallel.</p>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">26-Layer Defence Stack</span>
+        <p>Stealth Mode v2 · Behavior Analyzer + Gatekeeper (a seven-rule 0–100 scoring model) · Phase-2A humanisation · adaptive rate limiting · reputation tracking · phone-uniqueness enforcement · and twenty other independent layers. Compound effect: the observed ban rate drops from Meta's 0.5% baseline to <b>0.1%</b> — a five-fold improvement across live tenants.</p>
+      </div>
+
+      <h4>Six Vertical Modules · One Shared Kernel</h4>
+      <div class="tag-row">
+        <span class="tag">Bookings</span>
+        <span class="tag">Dine-in QR</span>
+        <span class="tag">Accommodation</span>
+        <span class="tag">Gaming Topup</span>
+        <span class="tag">Restaurant Reservations</span>
+        <span class="tag">Lamah Calendar</span>
+      </div>
+
+      <h4>Salla Integration</h4>
+      <p>Salla is Saudi Arabia's largest e-commerce platform (55,000+ MENA stores). Phase 1 is live: OAuth 2.0 + Webhooks + product sync + disconnect. Every Salla store can convert to a thawani tenant with a single button.</p>
+
+      <div class="metric-box">
+        <span class="label">Commercial Model</span>
+        <p>SAR 50 / store / month via Meta WhatsApp Cloud API in Tech-Provider mode. Even a 1% Salla penetration yields SAR 27,500 monthly recurring revenue. Six-vertical shared-kernel design keeps unit economics healthy across scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH7: ARIA ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">ARIA v9.0 / GZP-LLM</span>
+      <span class="prod-tag">Sovereign AI Companion</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Base:</b> Qwen 2.5-7B</span>
+        <span class="meta-item"><b>Tuning:</b> LoRA r=64 + DPO</span>
+        <span class="meta-item"><b>Training compute:</b> Kaggle GPUs</span>
+        <span class="meta-item"><b>Design goal:</b> one human</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 7 · A Model For One Human</span>07 — ARIA v9.0</h2>
+
+      <p>Most AI models are "for everyone." ARIA is deliberately <b>not</b>. ARIA is designed to grow through an exclusive relationship with a single human — it has memory, a personality, autonomous background cognition, and a curiosity engine that asks real questions to fill its sensory blind spots.</p>
+
+      <div class="quote">
+        Not a chatbot. An intelligence that knows its owner.
+      </div>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">Curiosity Engine</span>
+        <p>Every hour, a background "curiosity" pass reviews the day's conversations, identifies gaps in the model's world model, and formulates targeted questions the human is prompted to answer. Over time ARIA <b>knows its owner better</b> than any general-purpose assistant.</p>
+      </div>
+
+      <h4>Strategic Value</h4>
+      <p>ARIA is not currently for sale. It is a <b>life pattern</b>. Once the internal loop is fully stabilised, the underlying infrastructure will be released as a hosted SaaS so any individual can build their own sovereign companion.</p>
+
+      <h4>Current State</h4>
+      <ul>
+        <li>v9.0 trained and running.</li>
+        <li>Real-time gaming overlay live.</li>
+        <li>Long-term memory persisted locally.</li>
+        <li>Arabic + English bilingual.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH8: SMART FLEET ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">NEXUS Vigil™ (Smart Fleet AI)</span>
+      <span class="prod-tag">Abandoned-Vehicle Intelligence</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Market:</b> US municipalities</span>
+        <span class="meta-item"><b>Coverage:</b> 6 states + 40 cities</span>
+        <span class="meta-item"><b>Endpoints:</b> 44 REST</span>
+        <span class="meta-item"><b>Database:</b> 97 MB live SQLite (WAL)</span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 8 · Every Abandoned Car Has a Story</span>08 — NEXUS Vigil™</h2>
+
+      <p>US municipalities spend millions removing abandoned vehicles. They do not know the vehicle's age, its owner history, or whether it is subject to manufacturer recall. NEXUS Vigil™ resolves all three in a single API call.</p>
+
+      <h4>The Signature</h4>
+      <div class="signature-box">
+        <span class="label">Mapillary Graph API v4 + NHTSA vPIC / Recalls</span>
+        <p>The product fuses two of the strongest open datasets in North America: <em>Mapillary</em> (crowdsourced street imagery at scale) and <em>NHTSA</em> (vehicle-manufacturer and recall data). Vigil captures a plate, resolves make/year, checks recall status, and opens a case file — in seconds.</p>
+      </div>
+
+      <div class="metric-box">
+        <span class="label">Proprietary Product</span>
+        <p>Full intellectual-property ownership. Municipalities buy subscription access; live SQLite database auto-updates. Coverage: Massachusetts, Connecticut, Rhode Island, New Hampshire, Vermont, Maine — plus 40 individual cities. Roadmap: EU municipalities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH9: SECURITY STACK ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 9 · The Security Stack</span>09 — Applied-Security Products</h2>
+
+  <p>Four products operate together as a single security fabric:</p>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">NEXUS SecOps + NEXUS_AUDIT Arsenal</span>
+      <span class="prod-tag">Red / Blue / AI / OSINT</span>
+    </div>
+    <div class="prod-body">
+      <p>32 registered security tools (Amass, Nuclei, Metasploit, CodeQL, garak, PyRIT, Shodan, Censys, and more) plus 4 live threat-intelligence feeds (GreyNoise · Leakix · urlscan · PublicWWW) exposed behind seven REST endpoints. A single command <code>nexus-audit &lt;target&gt;</code> wraps 10+ SAST/DAST tools with automatic language detection and language-specific rule packs.</p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">NEXUS Firm</span>
+      <span class="prod-tag">Policy-Governed Engineering Control Plane</span>
+    </div>
+    <div class="prod-body">
+      <p>One architectural rule: <em>LLM proposes → tools produce evidence → policy decides → agent executes within capability bounds.</em> Inter-agent handoffs are typed artifacts, never prose. Every state mutation is a validated, logged tool call.</p>
+      <div class="tag-row">
+        <span class="tag">OPA / Rego</span>
+        <span class="tag">MCP Gateway</span>
+        <span class="tag">Firecracker</span>
+        <span class="tag">gVisor</span>
+        <span class="tag">Capability Lattice</span>
+        <span class="tag">Evidence-WORM Memory</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">SENTINEL Enterprise + sentinel-cli</span>
+      <span class="prod-tag">Windows Security Suite</span>
+    </div>
+    <div class="prod-body">
+      <p>Windows SIEM + SOAR + ML in one bundle. For organisations that need endpoint protection on Windows without paying CrowdStrike enterprise pricing. Terminal companion (<code>sentinel-cli</code>) ships as a stand-alone open showcase repository.</p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">VulnAdvisor Pro</span>
+      <span class="prod-tag">Local Vulnerability Triage &amp; Advisory Engine</span>
+    </div>
+    <div class="prod-body">
+      <p>A local engine that ingests findings from Semgrep, Nuclei, and CodeQL and re-ranks them by <b>real exploitability</b>, not theoretical severity. Saves security teams days of noise triage per week.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH10: GAMING ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 10 · Gaming Universe</span>10 — Consumer Gaming Platforms</h2>
+
+  <p>Six shipped consumer products serving the Arabic gaming audience:</p>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Golden Arena 518</span>
+      <span class="prod-tag">AI-Powered Fantasy Battle Platform</span>
+    </div>
+    <div class="prod-body">
+      <p>A fantasy arena that pits characters from anime, video games, and film. AI analyses each character's abilities; an ELO system ranks them; an interactive tier list surfaces the meta.</p>
+      <p><b>URL:</b> <code>61465.github.io/game-zone-golden</code></p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Game Zone Archive</span>
+      <span class="prod-tag">Encyclopaedia + AI DNA Analyzer</span>
+    </div>
+    <div class="prod-body">
+      <p>200 characters × 200 games × 60+ franchises. An AI "DNA" analyser produces personalised game recommendations.</p>
+      <p><b>URL:</b> <code>61465.github.io/game-zone-archive</code></p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">The Last Save</span>
+      <span class="prod-tag">Interactive Narrative Game</span>
+    </div>
+    <div class="prod-body">
+      <p>An interactive narrative experience about memory and identity. Every decision alters the ending.</p>
+      <p><b>URL:</b> <code>61465.github.io/game-zone-game</code></p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">GZ Chat Pro</span>
+      <span class="prod-tag">Arabic-First Gamer Community Platform</span>
+    </div>
+    <div class="prod-body">
+      <p>Voice rooms, embedded mini-games, rank &amp; XP system — an Arabic-first alternative to Discord for the MENA gamer community.</p>
+      <p><b>URL:</b> <code>61465.github.io/GAME-ZONE-CHAT</code></p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Waraq Reader</span>
+      <span class="prod-tag">Educational Translation Platform</span>
+    </div>
+    <div class="prod-body">
+      <p>Multi-language reading with four study modes and Arabic AI translation support. Positioned as an educational reader for MENA students.</p>
+      <p><b>URL:</b> <code>61465.github.io/read</code></p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Golden Arena Configurator</span>
+      <span class="prod-tag">Decision-Analysis Tool</span>
+    </div>
+    <div class="prod-body">
+      <p>Compares games and hardware using radar charts and structured text analysis.</p>
+      <p><b>URL:</b> <code>61465.github.io/game-zone-CONFIGURATOR</code></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH11: SPECIALIZED ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 11 · Specialised Verticals</span>11 — Specialised Products</h2>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Zwaya Fit v0.3.0</span>
+      <span class="prod-tag">WhatsApp AI Health Coach</span>
+    </div>
+    <div class="prod-body">
+      <p>A full AI health coach delivered inside WhatsApp. Baileys + Groq stack. 16 REST endpoints. Groq-Vision meal analysis. Auto-generated weekly weight-tracking PNGs. Eleven achievement badges. Six context-aware alert types on a 10 AM / 6 PM scheduler. Exercise library with TTS audio. Family mode. Forty-feature admin dashboard.</p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">GZ CyberRange v0.1</span>
+      <span class="prod-tag">Fintech Training Lab · 30 Planted Vulnerabilities</span>
+    </div>
+    <div class="prod-body">
+      <p>A cyber range with thirty planted vulnerabilities spanning OWASP Top-10 · fintech-specific · Next.js SSR · API misc. Coverage validated at <b>86%</b> by an automated NEXUS attack loop. Positioned for corporate security-team training.</p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">Restaurant Management Suite</span>
+      <span class="prod-tag">Next.js + Prisma + Vercel</span>
+    </div>
+    <div class="prod-body">
+      <p>End-to-end restaurant operations. Menu with 200+ items. Deployed for one MENA operator. Prisma schema ready for multi-tenant rollout.</p>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">V24 Operations PWA</span>
+      <span class="prod-tag">Talabat + InstaShop Dashboard</span>
+    </div>
+    <div class="prod-body">
+      <p>Multi-channel operations dashboard for MENA food-delivery brands. Shift KPIs. Voice dictation. Supabase sync.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH12: RESEARCH ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 12 · Published Research</span>12 — Research Portfolio</h2>
+
+  <div class="research-block">
+    <span class="r-badge">SSRN 6870178 · MIT Licence</span>
+    <div class="r-title">Ariadne — Adaptive HITL Defence for AI Agents</div>
+    <p>A four-pillar defence framework against indirect prompt injection targeting autonomous AI agents: (1) least-privilege scoping, (2) tamper-evident observability, (3) synthetic deception, (4) human-gated remediation.</p>
+    <div class="metric-box" style="margin-top:8px;">
+      <span class="label">Reproducible Result</span>
+      <p>8,000-session AgentDojo benchmark. <b>90.6% adversarial containment</b> at 5.9% false-positive rate. Least-privilege pillar alone reaches 56.5% containment at <b>0% FPR</b>.</p>
+    </div>
+  </div>
+
+  <div class="research-block">
+    <span class="r-badge">SSRN 6602478 · IEEE TIFS extended bundle in preparation</span>
+    <div class="r-title">Oblivion Gate — Zero-Trace Fragmentation in Distributed Data Architectures</div>
+    <p>Three novel cryptographic protocols (BDSP · STCHP · HS-CPP) for zero-trace fragmentation of sensitive data plus decoy-based threat saturation. The core innovation: instead of encrypting the data, shatter it into individually meaningless fragments, distribute them, and populate the space with plausible decoys that saturate any adversary's search budget.</p>
+  </div>
+
+  <div class="research-block">
+    <span class="r-badge">arXiv-ready · Nexus Zone Commercial 1.0</span>
+    <div class="r-title">LucidCode — Program Verification with Grounded Anthropomorphic Interfaces</div>
+    <p>The academic paper behind LucidCode. Unifies compositional reasoning, adversarial mutation testing, provenance tracking, citation enforcement, and a zero-LLM truth path. Central philosophical claim: <em>you do not need a language model to know the truth — you only need one to describe it.</em></p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH13: KAGGLE ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 13 · Competitive Results</span>13 — Kaggle Track Record</h2>
+
+  <p><b>9,753 teams</b> competed across four active Kaggle tracks. Independent submissions against university and corporate teams. Verified live scores:</p>
+
+  <div class="stats-bar">
+    <div class="stat-item"><span class="n">91.755</span><span class="l">JED (Top 14.8%)</span></div>
+    <div class="stat-item"><span class="n">0.936</span><span class="l">RSNA AUC</span></div>
+    <div class="stat-item"><span class="n">1.78</span><span class="l">ARC-AGI-3</span></div>
+    <div class="stat-item"><span class="n">30.14</span><span class="l">ARC-AGI-2</span></div>
+  </div>
+
+  <h4>The Distilled Playbook</h4>
+  <div class="signature-box">
+    <span class="label">PLAYBOOK_KAGGLE.md — Verbatim-First</span>
+    <p>Extracted from twelve failed modification attempts across three competitions: <b>clone the strongest public notebook verbatim first, tune one knob per submission, never combine changes</b>. Eleven of twelve exploratory modifications regressed. The playbook is now a shared internal artefact for future Kaggle work.</p>
+  </div>
+
+  <h4>Published Writeups</h4>
+  <ul>
+    <li><b>ARC-AGI-2 Paper Track:</b> "The Symbolic Ceiling on ARC-AGI-2" — a novel application of Friston's Free Energy Principle to ARC; ρ(τ) computed on 320 tasks.</li>
+    <li><b>Pokémon TCG Strategy:</b> An α-Rank statistical study with Wilson confidence intervals on 200 games per cell, plus a five-signature strategic framework.</li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════ CH14: BOUNTIES ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 14 · Responsible Disclosure</span>14 — Applied-Security Track Record</h2>
+
+  <p>Nine engagements across HackerOne, Bugcrowd, and internal ranges. Two accepted. Several under active triage.</p>
+
+  <table class="bounty-table">
+    <thead>
+      <tr>
+        <th>Program</th><th>Platform</th><th>Severity</th><th>Vulnerability</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Syfe</b></td><td>HackerOne #3914035</td><td>CVSS 8.6</td>
+        <td>Web Cache Deception (CWE-524)</td>
+        <td><span class="status-accepted">Accepted</span></td>
+      </tr>
+      <tr>
+        <td><b>Gearset</b></td><td>Bugcrowd 0e7d2c90</td><td>P3</td>
+        <td>Excessive GitHub-OAuth scope (repo + write:repo_hook) on staging.claytonapp.com</td>
+        <td><span class="status-accepted">Accepted</span></td>
+      </tr>
+      <tr>
+        <td><b>Shopify</b></td><td>HackerOne #3919475</td><td>CVSS 8.7</td>
+        <td>Unified 7-vector chain (UCP SSRF + GCP trace leak + OTLP unauth + tenant spoof + schema oracle)</td>
+        <td><span class="status-triage">Triage</span></td>
+      </tr>
+      <tr>
+        <td><b>AXIS OS</b></td><td>Bugcrowd 8a7425f0</td><td>P2</td>
+        <td>ACAP D-Bus wildcard bypass of CVE-2025-5452 (firmware-validated on M1075-L 12.11.77)</td>
+        <td><span class="status-triage">Submitted</span></td>
+      </tr>
+      <tr>
+        <td><b>eToro</b></td><td>Bugcrowd f83be6be</td><td>P1</td>
+        <td>1-click ATO on Delta Desktop (6 chained bugs, live PoC)</td>
+        <td><span class="status-triage">Submitted</span></td>
+      </tr>
+      <tr>
+        <td><b>Okta AtSpoke</b></td><td>Bugcrowd 6d26be3a</td><td>P1</td>
+        <td>Application-wide CSRF via hardcoded <code>XSRF-TOKEN=JustAskSpoke!</code></td>
+        <td><span class="status-triage">Submitted</span></td>
+      </tr>
+      <tr>
+        <td><b>LaunchDarkly</b></td><td>Bugcrowd a91d8daa</td><td>P2</td>
+        <td>IAM read-bypass — any <code>api-*</code> token enumerates 16 account endpoints including member PII regardless of no_access + deny</td>
+        <td><span class="status-triage">Submitted</span></td>
+      </tr>
+      <tr>
+        <td><b>Magic Labs</b></td><td>Bugcrowd 696307c8</td><td>P3</td>
+        <td>reCAPTCHA bypass + user enumeration (13 staff accounts confirmed, including CEO and CTO)</td>
+        <td><span class="status-triage">Submitted</span></td>
+      </tr>
+      <tr>
+        <td><b>GZ CyberRange</b><br>(self-built lab)</td><td>Internal</td><td>—</td>
+        <td>30-vulnerability fintech training lab; 86% hunter coverage validated</td>
+        <td><span class="status-live">Live</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════ CH15: ROADMAP ═══════════════════════════════ -->
+<section>
+  <h2><span class="h2-tag">Chapter 15 · Roadmap Ahead</span>15 — Roadmap</h2>
+
+  <h4>Next 90 Days</h4>
+  <ul>
+    <li>Onboard the first three paying pilots for <b>Laundry</b> at USD 499 / month per repository.</li>
+    <li>Publish first hospital pilot for <b>midcine</b> in Egypt.</li>
+    <li>Complete peer-review preparation for the <b>LucidCode</b> paper.</li>
+    <li>Announce the Arabic-first LLM (Nexus Zone AI model — evaluation phase).</li>
+  </ul>
+
+  <h4>Next 6 Months</h4>
+  <ul>
+    <li>Hosted multi-tenant dashboard for <b>Laundry</b>.</li>
+    <li>SOC 2 certification path opened to unlock enterprise sales.</li>
+    <li>Ten paying customers · USD 30K ARR target.</li>
+    <li>Publish the <b>Ariadne</b> IEEE TIFS extended bundle.</li>
+  </ul>
+
+  <h4>Next 12 Months</h4>
+  <ul>
+    <li>Nexus Zone at USD 100K ARR.</li>
+    <li>First pre-seed or seed round.</li>
+    <li>Team expansion to three engineers.</li>
+    <li>ARIA v10 with open-source companion infrastructure.</li>
+  </ul>
+
+  <div class="quote">
+    A product is not judged by the demo. It is judged by the reproducible run.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FINAL ═══════════════════════════════ -->
+<div class="final-page">
+  <h2>Engage With Nexus Zone</h2>
+  <p class="final-msg">
+    Every product in this catalog is real, published, and independently verifiable. Requests for evaluation copies, pilot programmes, licensing conversations, or research collaboration are welcomed.
+  </p>
+  <div class="contact-block">
+    <p style="color:#999; font-size:9.5pt; letter-spacing:2px; margin-bottom:12px;">CONTACT</p>
+    <div class="email">abdarahman10555@gmail.com</div>
+    <p style="color:#888; margin-top:15px; font-size:9pt;">Response within one business day.</p>
+  </div>
+  <p style="margin-top:45mm; color:#666; font-size:9pt;">
+    <b style="color:#d4af37;">Nexus Zone</b> — <em>Where technology meets craft.</em><br>
+    Founded by game_nexus_zone · Portfolio Companion Edition 2026
+  </p>
+</div>
+
+</body>
+</html>
