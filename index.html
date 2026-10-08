@@ -515,15 +515,28 @@
     <span class="r-badge">Open-Source Contributions · fully public</span>
     <div class="r-title">Hire-signal PRs — click to verify code, tests, and maintainer review</div>
     <ul>
-      <li><b>PostHog PR #5083</b> — opt-in bot detection heuristics · <a href="https://github.com/PostHog/posthog-js/pull/5083">github.com/PostHog/posthog-js/pull/5083</a></li>
-      <li><b>Supabase PR #1439</b> — UTF-8 object keys + invisible-glyph reject list · <a href="https://github.com/supabase/storage/pull/1439">github.com/supabase/storage/pull/1439</a></li>
+      <li><b>PostHog PR #5083</b> — opt-in WebView bot detection (merged by @marandaneto, 11-day round trip) · <a href="https://github.com/PostHog/posthog-js/pull/5083">pull/5083</a> · <span class="tag green">MERGED</span></li>
+      <li><b>PostHog PR #5244</b> — port of upstream rrweb #1652 fixing a 9–10 s session-replay freeze on 13 k-node mounts (<code>MutationBuffer.processBufferedMutations</code> O(n²) → O(n)); shadow-DOM-aware walk-up loop · <a href="https://github.com/PostHog/posthog-js/pull/5244">pull/5244</a> · <span class="tag">in review</span></li>
+      <li><b>Supabase storage PR #1488</b> — auto-select URL-signing JWK from <code>JWT_JWKS</code> (closes #629, open 607 days). Pure helper avoiding circular logger dep; 25 new tests incl. a jose round-trip proof · <a href="https://github.com/supabase/storage/pull/1488">pull/1488</a> · <span class="tag">in review</span></li>
+      <li><b>Supabase storage PR #1439</b> — downstream-neutral key hardening (NFC normalization, lone-surrogate reject, byte-length ceiling, branchless path-traversal detector) · <a href="https://github.com/supabase/storage/pull/1439">pull/1439</a> · <span class="tag">in review</span></li>
+      <li><b>apds-hunt v0.1</b> — reference implementation of the APDS methodology (XOR Rule theorem + 6-step algorithm + CVE-2024-40658 shape self-test), MIT · <a href="https://github.com/61465/apds-hunt">github.com/61465/apds-hunt</a> · <span class="tag green">PUBLIC</span></li>
     </ul>
   </div>
 
   <div class="research-block">
-    <span class="r-badge">Published Research · SSRN public</span>
-    <div class="r-title">Peer-review-ready papers</div>
+    <span class="r-badge">Accepted security advisories · public GHSA</span>
+    <div class="r-title">First-of-their-kind GHSAs on their respective repos</div>
     <ul>
+      <li><b>Trigger.dev · GHSA-65rr-73jq-6qhf</b> — accepted by @ChrisArderne 2026-10-07 (CVSS 9.6; 90-day disclosure clock)</li>
+      <li><b>Documenso · GHSA-2rp7-mrh6-v9m2</b> — in triage (CVSS 7.6; first-ever GHSA on the repo; rejected-recipient field forgery across 3 tRPC routes)</li>
+    </ul>
+  </div>
+
+  <div class="research-block">
+    <span class="r-badge">Published Research &amp; Methodology · public</span>
+    <div class="r-title">Peer-review-ready papers + methodology artefacts</div>
+    <ul>
+      <li><b>APDS — Asymmetric Patch Detection for Symmetric APIs</b> (v1.0, Oct 2026) · formal XOR Rule theorem + 6-step algorithm + retrospective validation on 5 landmark CVEs (BlueBorne, Stagefright, LogJam, V8 CVE-2016-1646, HDR10+ 2024) · reference tool at <a href="https://github.com/61465/apds-hunt">github.com/61465/apds-hunt</a></li>
       <li><b>Ariadne — HITL Defence for AI Agents</b> · <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6870178">SSRN 6870178</a></li>
       <li><b>Oblivion Gate — Zero-Trace Fragmentation</b> · <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6602478">SSRN 6602478</a></li>
     </ul>
@@ -559,7 +572,12 @@
     <span class="r-badge">Responsible-disclosure anchors</span>
     <div class="r-title">Submission IDs — available for HR verification on request</div>
     <ul>
+      <li><b>Google Android VRP — APDS methodology + CVE-2024-40658 symmetric sibling (CVSS 10.0 Critical)</b> · Issue <code>571135577</code> · <span class="tag green">In Panel Review</span> · byte-identical un-patched sibling across 6 AOSP branches (android14-qpr3 → android17-release, 25 months of ASB silence); live binary verification from Android 16 QPR1 emulator image</li>
       <li><b>Google OSS VRP — Gemini CLI chained RCE</b> · Issue <code>563082721</code> · <span class="tag green">S0/P0 Accepted</span></li>
+      <li><b>Google Cloud VRP — Vertex AI pickle cross-tenant RCE</b> · Issue <code>569156158</code> · <span class="tag">AI-triage done, human review</span></li>
+      <li><b>Google OSS VRP — ADK MCP token forwarding</b> · Issue <code>569269080</code> · <span class="tag green">P1 (upgraded in 5 min)</span></li>
+      <li><b>Google Cloud VRP — Agent Builder RLHF / BOLA</b> · Issue <code>569402823</code> · <span class="tag">AI-triage done, human review</span></li>
+      <li><b>Google Cloud VRP — Agent Builder custom-function RCE</b> · Issue <code>569575994</code> · <span class="tag">In triage</span></li>
       <li><b>Syfe · Web Cache Deception (CVSS 8.6)</b> · HackerOne <code>#3914035</code> · <span class="tag green">Accepted</span></li>
       <li><b>Gearset · Excessive GitHub-OAuth scope</b> · Bugcrowd <code>0e7d2c90</code> · <span class="tag green">Accepted</span></li>
       <li><b>Cal.com · Zero-click PII leak (CVSS 9.1, live-verified on <code>app.cal.qa</code>)</b> · Bugcrowd <code>30c5dfce</code></li>
@@ -1172,7 +1190,7 @@
 <section>
   <h2><span class="h2-tag">Chapter 14 · Responsible Disclosure</span>14 — Applied-Security Track Record</h2>
 
-  <p>Thirteen engagements across Google OSS VRP, HackerOne, Bugcrowd, Trend Micro ZDI, and internal ranges. Three accepted (including a Google Gemini CLI S0/P0). Several under active triage — including a Cal.com CVSS 9.1 zero-click PII leak <b>live-verified on the in-scope QA target</b>.</p>
+  <p>Twenty+ engagements across Google ASR / OSS VRP / Cloud VRP, HackerOne, Bugcrowd, Trend Micro ZDI, GitHub Security Advisories, and internal ranges. October 2026 added the APDS methodology submission to Google Android ASR (CVSS 10.0 Critical, in panel review), two accepted GHSAs (Trigger.dev CVSS 9.6 + Documenso 7.6 in triage), and five further Google VRP tickets. Earlier accepted: Google Gemini CLI S0/P0, Syfe CVSS 8.6, Gearset P3.</p>
 
   <table class="bounty-table">
     <thead>
@@ -1181,6 +1199,41 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td><b>Google Android ASR</b></td><td>Issue 571135577</td><td>CVSS 10.0</td>
+        <td><b>APDS methodology + CVE-2024-40658 symmetric sibling.</b> First formal application of Asymmetric Patch Detection for Symmetric APIs. Un-patched sibling of CVE-2024-40658 byte-identical across 6 AOSP branches (android14-qpr3 → android17-release) for 25 months of ASB silence. Live binary verification from a Google-published Android 16 QPR1 emulator image (security patch 2026-01-05). 3/3 reproduction runs captured. Open-sourced the reference tool as <code>apds-hunt</code> within 24 h of the submission commitment.</td>
+        <td><span class="status-triage">In Panel Review</span></td>
+      </tr>
+      <tr>
+        <td><b>Trigger.dev</b></td><td>GHSA-65rr-73jq-6qhf</td><td>CVSS 9.6</td>
+        <td>Accepted by @ChrisArderne on 2026-10-07. 90-day disclosure clock running.</td>
+        <td><span class="status-accepted">Accepted</span></td>
+      </tr>
+      <tr>
+        <td><b>Documenso</b></td><td>GHSA-2rp7-mrh6-v9m2</td><td>CVSS 7.6</td>
+        <td>Rejected-recipient field forgery across 3 tRPC routes. First-ever GHSA on the Documenso repo.</td>
+        <td><span class="status-triage">In Triage</span></td>
+      </tr>
+      <tr>
+        <td><b>Google Cloud VRP</b></td><td>Issue 569156158</td><td>CVSS 9.9</td>
+        <td>Vertex AI pickle cross-tenant RCE — <code>pickle_object_gcs_uri</code> free-form path → Vertex Agent Engine arbitrary code execution across tenant boundaries.</td>
+        <td><span class="status-triage">AI-triage done</span></td>
+      </tr>
+      <tr>
+        <td><b>Google OSS VRP</b></td><td>Issue 569269080</td><td>CVSS 9.6</td>
+        <td>Google ADK — AgentRegistry sends Google Cloud ADC OAuth token to ANY registered MCP URL. P1 upgraded by panel in 5 minutes.</td>
+        <td><span class="status-triage">P1 Upgraded</span></td>
+      </tr>
+      <tr>
+        <td><b>Google Cloud VRP</b></td><td>Issue 569402823</td><td>CVSS 9.9</td>
+        <td>Agent Builder — RLHF poisoning via <code>feedbackEntries</code> + memory-banks BOLA.</td>
+        <td><span class="status-triage">AI-triage done</span></td>
+      </tr>
+      <tr>
+        <td><b>Google Cloud VRP</b></td><td>Issue 569575994</td><td>CVSS 10.0</td>
+        <td>Agent Builder — <code>CodeExecutionMetric.custom_function</code> arbitrary Python RCE via 5 endpoints; 6 code-execution primitives; GDPR/HIPAA bypass via 24-region sandbox-shopping.</td>
+        <td><span class="status-triage">In Triage</span></td>
+      </tr>
       <tr>
         <td><b>Google OSS VRP</b></td><td>Issue 563082721</td><td>S0 / P0</td>
         <td>Gemini CLI chained RCE — 6-defect zero-click supply-chain chain, CVSS 10.0. Security engineer took over, linked to a blocked-by bug. Panel decision in 2–3 weeks; expected reward band $30K–$75K.</td>
