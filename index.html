@@ -471,6 +471,7 @@
   <div class="toc-item"><span class="toc-num">03</span><span class="toc-name">Laundry — the legacy-code laundry room</span><span class="toc-page">Ch. 3</span></div>
   <div class="toc-item"><span class="toc-num">04</span><span class="toc-name">NEXUS-AI — 134-agent fabric + cyber grounding gate</span><span class="toc-page">Ch. 4</span></div>
   <div class="toc-item"><span class="toc-num">05</span><span class="toc-name">midcine — Arabic radiology AI</span><span class="toc-page">Ch. 5</span></div>
+  <div class="toc-item"><span class="toc-num">05.5</span><span class="toc-name">MEDNEXA — healthcare integration platform (HIS × LIS × PACS)</span><span class="toc-page">Ch. 5.5</span></div>
   <div class="toc-item"><span class="toc-num">06</span><span class="toc-name">thawani.cc — WhatsApp commerce SaaS</span><span class="toc-page">Ch. 6</span></div>
   <div class="toc-item"><span class="toc-num">07</span><span class="toc-name">ARIA v9.0 — sovereign AI companion</span><span class="toc-page">Ch. 7</span></div>
   <div class="toc-item"><span class="toc-num">08</span><span class="toc-name">NEXUS Vigil™ — abandoned-vehicle intelligence</span><span class="toc-page">Ch. 8</span></div>
@@ -560,6 +561,8 @@
       <li><b>LucidCode landing</b> · <a href="https://61465.github.io/lucid/landing">61465.github.io/lucid/landing</a></li>
       <li><b>Laundry interactive demo</b> · <a href="https://61465.github.io/lucid/landing/laundry.html">61465.github.io/lucid/landing/laundry.html</a></li>
       <li><b>Thawani commerce SaaS</b> · <a href="https://thawani.cc">thawani.cc</a> (paid tenants live) · <b>backup landing:</b> <a href="https://61465.github.io/thawanidemo/">61465.github.io/thawanidemo</a> · <b>source:</b> <a href="https://github.com/61465/Thawani">github.com/61465/Thawani</a></li>
+      <li><b>MEDNEXA healthcare integration platform</b> · <b>source:</b> <a href="https://github.com/61465/MEDNEXA">github.com/61465/MEDNEXA</a> (Egyptian HIS × LIS × PACS wiring; HL7v2 + FHIR R4 + DICOM; PDPC Law 151/2020 + HIPAA-aligned)</li>
+      <li><b>midcine Arabic radiology AI</b> · <b>source:</b> <a href="https://github.com/61465/midcine">github.com/61465/midcine</a></li>
       <li><b>Golden Arena 518</b> · <a href="https://61465.github.io/game-zone-golden">61465.github.io/game-zone-golden</a></li>
       <li><b>Game Zone Archive</b> · <a href="https://61465.github.io/game-zone-archive">61465.github.io/game-zone-archive</a></li>
       <li><b>Waraq Reader</b> · <a href="https://61465.github.io/read">61465.github.io/read</a></li>
@@ -830,6 +833,61 @@
       </div>
 
       <p><b>Live demo:</b> <code>ame.tail19ddab.ts.net:8445/reports</code> (private Tailscale Funnel · synthetic patients).</p>
+      <p><b>Source showcase:</b> <a href="https://github.com/61465/midcine">github.com/61465/midcine</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CH5.5: MEDNEXA ═══════════════════════════════ -->
+<section>
+  <div class="product">
+    <div class="prod-header">
+      <span class="prod-name">MEDNEXA</span>
+      <span class="prod-tag">Healthcare Integration Platform · HIS × LIS × PACS</span>
+    </div>
+    <div class="prod-body">
+      <div class="prod-meta">
+        <span class="meta-item"><b>Target:</b> Egyptian mid-market hospitals</span>
+        <span class="meta-item"><b>Compliance:</b> PDPC Law 151/2020 + HIPAA-aligned</span>
+        <span class="meta-item"><b>Status:</b> Session 01 complete · pilot-ready</span>
+        <span class="meta-item"><b>Engine tests:</b> 128 / 128 passing</span>
+      </div>
+
+      <div class="prod-meta" style="margin-top:4px;">
+        <span class="meta-item"><b>Source showcase:</b> <a href="https://github.com/61465/MEDNEXA">github.com/61465/MEDNEXA</a></span>
+        <span class="meta-item"><b>Pilot &amp; DPA inquiries:</b> <code>abdarahman10555@gmail.com</code></span>
+      </div>
+
+      <h2 style="margin-top:0;"><span class="h2-tag">Chapter 5.5 · Connecting Healthcare</span>05.5 — MEDNEXA</h2>
+
+      <p>Where <b>midcine</b> owns the reading side of radiology, <b>MEDNEXA</b> owns the <b>wiring</b> between the hospital's existing HIS, LIS, PACS, and clinical workflows. Egyptian mid-market hospitals typically run three or four disconnected vendor systems; MEDNEXA stitches them together with real HL7v2 / FHIR R4 / DICOM pipes, PDPC-compliant consent management, and a hash-chained audit log that makes any after-the-fact mutation detectable.</p>
+
+      <h4>What the Engine Actually Ships</h4>
+      <ul>
+        <li><b>FastAPI engine</b> (Python 3.12) with 80+ REST routes.</li>
+        <li><b>Real DIMSE SCP</b> receiving <code>C-STORE</code> and <code>C-FIND Modality Worklist</code> on port <code>11112</code>.</li>
+        <li><b>HL7v2 parser</b> covering <code>ADT</code> / <code>ORM</code> / <code>ORU</code> / <code>OUL</code> / <code>MDM</code>, piping into FHIR R4 builders (<code>Observation</code>, <code>DiagnosticReport</code>, <code>ServiceRequest</code>, <code>Patient</code>, <code>Practitioner</code>).</li>
+        <li><b>DICOM in-browser viewer</b> on Cornerstone.js for sample CT studies.</li>
+        <li><b>Report state machine</b>: <code>draft → signed → finalized → amended</code> with full audit trace at every transition.</li>
+        <li><b>Hash-chained audit log</b> (SHA-256 <code>prev_hash + hash</code>) — any mutation after the fact is detectable.</li>
+        <li><b>MFA TOTP</b> (RFC 6238) with AES-256-GCM-encrypted secrets at rest.</li>
+        <li><b>Refresh-token rotation</b> (SHA-256-hashed), sliding-window per-IP + per-user rate limits.</li>
+        <li><b>Bilingual UI</b>: Arabic RTL + English LTR, Clinical Editorial design system.</li>
+        <li><b>nginx 1.27 reverse proxy</b> with CSP / HSTS / X-Frame-Options.</li>
+      </ul>
+
+      <div class="signature-box">
+        <span class="label">The Signature — Hash-Chained Audit</span>
+        <p>Every state transition in the engine (login, report sign, DICOM store, consent grant, export) writes an entry carrying both its own SHA-256 and the previous entry's SHA-256. Rolling back the audit log requires rolling back every subsequent entry too — which is detectable at verification time. This is the core of the PDPC Law 151/2020 defensive posture.</p>
+      </div>
+
+      <div class="metric-box">
+        <span class="label">Four-Role Demo Matrix</span>
+        <p>Pilot deployments expose Admin · Radiologist · Doctor (referring) · Patient. Scoped-ACL enforcement means the referring doctor sees only the patients a patient has consented to for them, with admin approval also required — a two-key gate per access, logged.</p>
+      </div>
+
+      <h4>Deliberately Not Shipped Publicly</h4>
+      <p>The strategy, 15-slide pitch deck, 36-month × 3-scenario financial model, DPA (PDPC Law 151/2020-aligned) + SLA + SOW templates, 30-question discovery questionnaire, ROI calculator, and the engine source itself live under commercial license and ship under NDA for pilot evaluations. The showcase repository on GitHub contains the README, brand, and compliance posture only.</p>
     </div>
   </div>
 </section>
