@@ -513,13 +513,37 @@
   <p>Every claim in this document is externally verifiable. Below is a single index of the public URLs that back the numbers. If a reviewer wants to independently confirm a specific claim, the corresponding link resolves to the artifact — a merged PR, a published paper, a live demo, a Kaggle placement, an accepted bounty report, or a public product landing page.</p>
 
   <div class="research-block">
-    <span class="r-badge">Open-Source Contributions · fully public</span>
+    <span class="r-badge">Open-Source Contributions · 10 organisations, fully public</span>
     <div class="r-title">Hire-signal PRs — click to verify code, tests, and maintainer review</div>
+
+    <p style="margin:4px 0 6px 0; font-weight:700;">Merged</p>
     <ul>
       <li><b>PostHog PR #5083</b> — opt-in WebView bot detection (merged by @marandaneto, 11-day round trip) · <a href="https://github.com/PostHog/posthog-js/pull/5083">pull/5083</a> · <span class="tag green">MERGED</span></li>
-      <li><b>PostHog PR #5244</b> — port of upstream rrweb #1652 fixing a 9–10 s session-replay freeze on 13 k-node mounts (<code>MutationBuffer.processBufferedMutations</code> O(n²) → O(n)); shadow-DOM-aware walk-up loop · <a href="https://github.com/PostHog/posthog-js/pull/5244">pull/5244</a> · <span class="tag">in review</span></li>
-      <li><b>Supabase storage PR #1488</b> — auto-select URL-signing JWK from <code>JWT_JWKS</code> (closes #629, open 607 days). Pure helper avoiding circular logger dep; 25 new tests incl. a jose round-trip proof · <a href="https://github.com/supabase/storage/pull/1488">pull/1488</a> · <span class="tag">in review</span></li>
-      <li><b>Supabase storage PR #1439</b> — downstream-neutral key hardening (NFC normalization, lone-surrogate reject, byte-length ceiling, branchless path-traversal detector) · <a href="https://github.com/supabase/storage/pull/1439">pull/1439</a> · <span class="tag">in review</span></li>
+      <li><b>Supabase storage PR #1500</b> — TUS <code>X-Supabase-Object-Id</code> response header (merged by @ferhatelmas, closes 2-year #647) · <a href="https://github.com/supabase/storage/pull/1500">pull/1500</a> · <span class="tag green">MERGED</span></li>
+    </ul>
+
+    <p style="margin:6px 0;"><b>Open PRs under review</b></p>
+    <ul>
+      <li><b>Drizzle ORM PR #6497</b> — <code>useLiveQuery</code> on <code>expo-sqlite</code> subscribes to joined tables; new <code>SQLiteRelationalQuery.getReferencedTables()</code> with cycle guard · <a href="https://github.com/drizzle-team/drizzle-orm/pull/6497">pull/6497</a> · <span class="tag">in review</span></li>
+      <li><b>Sentry-JS PR #25348</b> — Nuxt pages-router client-plugin unit tests, 5 code paths × 13 cases (pre-blessed by MEMBER @JPeer264) · <a href="https://github.com/getsentry/sentry-javascript/pull/25348">pull/25348</a> · <span class="tag">in review</span></li>
+      <li><b>Sentry Relay PR #6508</b> — derived trace context prefers the DSC <code>trace_id</code>; 84/84 local tests · <a href="https://github.com/getsentry/relay/pull/6508">pull/6508</a> · <span class="tag">in review</span></li>
+      <li><b>SvelteKit PR #17432</b> — <code>adapter-cloudflare</code> swaps the Cloudflare platform proxy in place when <code>wrangler.toml</code> changes (Vercel bot: "the bug is fixed") · <a href="https://github.com/sveltejs/kit/pull/17432">pull/17432</a> · <span class="tag">in review</span></li>
+      <li><b>Inngest PR #5004</b> — single shared TracerProvider via <code>BatchSpanProcessor</code>, stops a per-run <code>OtelTracerProvider</code> leak · <a href="https://github.com/inngest/inngest/pull/5004">pull/5004</a> · <span class="tag">in review</span></li>
+      <li><b>Supabase storage PR #1488</b> — JWK auto-selection (closes 607-day #629); 25 tests incl. jose round-trip proof · <a href="https://github.com/supabase/storage/pull/1488">pull/1488</a> · <span class="tag">in review</span></li>
+      <li><b>Supabase storage PR #1499</b> — magic-byte MIME validator closing #639; 61 tests + 2 security-review iterations with <code>depthfirst-app</code> (ZIP/OLE2 bypass closures) · <a href="https://github.com/supabase/storage/pull/1499">pull/1499</a> · <span class="tag">in review</span></li>
+      <li><b>Supabase auth PR #2863</b> — preserve OAuth 2.1 client sessions during MFA step-up · <a href="https://github.com/supabase/auth/pull/2863">pull/2863</a> · <span class="tag">in review</span></li>
+      <li><b>PostHog PR #5244</b> — rrweb <code>MutationBuffer.processBufferedMutations</code> O(n²)→O(n); 500-row shadow-DOM regression · <a href="https://github.com/PostHog/posthog-js/pull/5244">pull/5244</a> · <span class="tag">in review</span></li>
+    </ul>
+
+    <p style="margin:6px 0;"><b>Maintainer-blessed design proposals</b></p>
+    <ul>
+      <li><b>Prisma ORM #20678</b> — ALS-based transparent transaction propagation for <code>$extends</code> on the v7 maintenance line; 8-case failure matrix · <a href="https://github.com/prisma/orm/issues/20678">issue/20678</a></li>
+      <li><b>Node.js core #55422</b> — LTS-only fix for <code>Buffer.copy</code> silent corruption past 4 GiB (v22.x + v24.x), zero V8-ABI change · <a href="https://github.com/nodejs/node/issues/55422">issue/55422</a></li>
+      <li><b>Nitro #4471</b> — conditions-aware <code>externals.ts</code> resolve so <code>@sentry/tanstackstart-react</code> doesn't crash the Rollup graph; co-designed with @hiranuma's bisect · <a href="https://github.com/nitrojs/nitro/issues/4471">issue/4471</a></li>
+    </ul>
+
+    <p style="margin:6px 0;"><b>Published tool</b></p>
+    <ul>
       <li><b>apds-hunt v0.1</b> — reference implementation of the APDS methodology (XOR Rule theorem + 6-step algorithm + CVE-2024-40658 shape self-test), MIT · <a href="https://github.com/61465/apds-hunt">github.com/61465/apds-hunt</a> · <span class="tag green">PUBLIC</span></li>
     </ul>
   </div>
